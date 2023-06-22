@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Criar Usuário
+{% endblock title %}
+
+{% block content %}
+<h2>Cadastro</h2>
+<hr><br>
+<h4>Escolha como deseja realizar seu cadastro:</h4>
+
+<a href="{% url 'signup-client' %}" type='button' class="btn btn-primary btn-lg btn-block">Cliente</a>
+<a href="{% url 'signup-employee' %}" type='button' class="btn btn-secondary btn-lg btn-block">Prestador</a>
+
+<br>
+<p>Já possui cadastro? <a href="{% url 'login' %}">Faça login</a></p>
+
+{% endblock content %} 

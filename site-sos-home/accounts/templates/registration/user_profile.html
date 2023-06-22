@@ -1,0 +1,276 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+Perfil de Usuário
+{% endblock title %}
+
+
+{% block content %}
+
+<style>
+    .container{
+    display:grid;
+    grid-template-areas: "bx1"
+    "bx2";}
+    li{
+    list-style-type: none;
+    }
+    #logo {
+    border-radius: 50%;
+    margin:0;
+    padding:0%
+    }
+    a {
+    text-decoration: none;
+    }
+</style>
+
+<h1>Perfil de Usuário</h1>
+
+{% if user.is_employee %}
+
+<div class="container" style="background-color: #2c2b2e38;">
+    <br>
+    <div class='row'>
+    <div class='p-20' ><img src={{user.imageURL}} width='180'></div>
+    <div class='col'><h2>{{user.name}}</h2></div>
+    </div>
+    <hr width=100% color='gray'>
+    <h3>Dados:</h3>
+    <div class='row'>
+    <div class='col self-align-center'>                                                                                   
+        <ul style="list-style: none; margin: 2%">
+        <li><b>Idade:</b> {{user.age}}</li>
+        <li><b>Email: </b>{{user.email}}</li>
+        <li><b>Data de Nascimento: </b>{{user.birth_date}}</li>
+        <li><b>Sexo: </b>{{user.gender}}</li>
+        <li><b>Endereço: </b> {{user.adress}}</li>
+        <li><b>Profissão:</b>
+        
+        {% for job in user.job.all %}
+            {{job}},
+        {% endfor %}</li>
+
+        <li><b>Disponibilidade:</b>
+        {% for disp in disp %}
+        {{disp}},
+        {% endfor %}</li>
+        <li><b>Avaliação: </b>
+        {% if avg_rate == 5 %}
+            <img src="https://cdn-icons-png.flaticon.com/512/1828/1828614.png" width="15">
+            <img src="https://cdn-icons-png.flaticon.com/512/1828/1828614.png" width="15">
+            <img src="https://cdn-icons-png.flaticon.com/512/1828/1828614.png" width="15">
+            <img src="https://cdn-icons-png.flaticon.com/512/1828/1828614.png" width="15">
+            <img src="https://cdn-icons-png.flaticon.com/512/1828/1828614.png" width="15">
+            {% elif avg_rate >= 4 %}
+            <img src="https://cdn-icons-png.flaticon.com/512/1828/1828614.png" width="15">
+            <img src="https://cdn-icons-png.flaticon.com/512/1828/1828614.png" width="15">
+            <img src="https://cdn-icons-png.flaticon.com/512/1828/1828614.png" width="15">
+            <img src="https://cdn-icons-png.flaticon.com/512/1828/1828614.png" width="15">
+            <img src="https://cdn-icons-png.flaticon.com/512/1828/1828970.png" width="15">
+            {% elif avg_rate >= 3 %}
+            <img src="https://cdn-icons-png.flaticon.com/512/1828/1828614.png" width="15">
+            <img src="https://cdn-icons-png.flaticon.com/512/1828/1828614.png" width="15">
+            <img src="https://cdn-icons-png.flaticon.com/512/1828/1828614.png" width="15">
+            <img src="https://cdn-icons-png.flaticon.com/512/1828/1828970.png" width="15">
+            <img src="https://cdn-icons-png.flaticon.com/512/1828/1828970.png" width="15">
+            {% elif avg_rate >= 2 %}
+            <img src="https://cdn-icons-png.flaticon.com/512/1828/1828614.png" width="15">
+            <img src="https://cdn-icons-png.flaticon.com/512/1828/1828614.png" width="15">
+            <img src="https://cdn-icons-png.flaticon.com/512/1828/1828970.png" width="15">
+            <img src="https://cdn-icons-png.flaticon.com/512/1828/1828970.png" width="15">
+            <img src="https://cdn-icons-png.flaticon.com/512/1828/1828970.png" width="15">
+            {% else %}
+            <img src="https://cdn-icons-png.flaticon.com/512/1828/1828614.png" width="15">
+            <img src="https://cdn-icons-png.flaticon.com/512/1828/1828970.png" width="15">
+            <img src="https://cdn-icons-png.flaticon.com/512/1828/1828970.png" width="15">
+            <img src="https://cdn-icons-png.flaticon.com/512/1828/1828970.png" width="15">
+            <img src="https://cdn-icons-png.flaticon.com/512/1828/1828970.png" width="15">
+            {% endif %} <b>({{avg_rate}}/5)</b></li><br>
+        </ul>
+        <hr>
+        <div class="media" style="text-align: justify;">
+            <h5><a href="{% url 'update-user' %}" class="btn btn-primary">Atualizar Dados</a></h5>
+            <img src="https://cdn-icons-png.flaticon.com/512/1159/1159633.png" width="40" class="mr-5 rounded" style="padding: 5px"> <br>    
+        </div>
+        <h5><a href="{% url 'update-employee' %}" class="btn btn-dark">Alterar Profissão/Disponibilidade</a></h5>
+    </div>
+    </div>
+</div>
+
+<hr width=100% color='grey'>
+
+<section>
+    <header>
+        <h3>Avaliações</h3><br>
+
+    {% if not rating.all %}
+        <small>Ainda não existe nenhuma avaliação para este perfil.</small>
+        <br><br>
+    {% else %}
+        {% for rate in rating.all %}
+            <h5><a href="{% url 'detail' rate.author.id %}">{{ rate.author.name }}</a><small>- {{ rate.date }}</small></h5> 
+           
+            {% if rate.body %}
+            <b>Comentário:</b> "{{ rate.body }}"
+            {% else %}
+            <b>Comentário:</b> <i><small>Nenhum</small></i>
+            {% endif %}
+
+            <br><b>Nota:</b> 
+            {% if rate.rate == 1 %}
+            <img src="https://cdn-icons-png.flaticon.com/512/1828/1828614.png" width="15">
+            <img src="https://cdn-icons-png.flaticon.com/512/1828/1828970.png" width="15">
+            <img src="https://cdn-icons-png.flaticon.com/512/1828/1828970.png" width="15">
+            <img src="https://cdn-icons-png.flaticon.com/512/1828/1828970.png" width="15">
+            <img src="https://cdn-icons-png.flaticon.com/512/1828/1828970.png" width="15">
+
+            {% elif rate.rate == 2 %}
+            <img src="https://cdn-icons-png.flaticon.com/512/1828/1828614.png" width="15">
+            <img src="https://cdn-icons-png.flaticon.com/512/1828/1828614.png" width="15">
+            <img src="https://cdn-icons-png.flaticon.com/512/1828/1828970.png" width="15">
+            <img src="https://cdn-icons-png.flaticon.com/512/1828/1828970.png" width="15">
+            <img src="https://cdn-icons-png.flaticon.com/512/1828/1828970.png" width="15">
+            {% elif rate.rate == 3 %}
+            <img src="https://cdn-icons-png.flaticon.com/512/1828/1828614.png" width="15">
+            <img src="https://cdn-icons-png.flaticon.com/512/1828/1828614.png" width="15">
+            <img src="https://cdn-icons-png.flaticon.com/512/1828/1828614.png" width="15">
+            <img src="https://cdn-icons-png.flaticon.com/512/1828/1828970.png" width="15">
+            <img src="https://cdn-icons-png.flaticon.com/512/1828/1828970.png" width="15">
+            {% elif rate.rate == 4 %}
+            <img src="https://cdn-icons-png.flaticon.com/512/1828/1828614.png" width="15">
+            <img src="https://cdn-icons-png.flaticon.com/512/1828/1828614.png" width="15">
+            <img src="https://cdn-icons-png.flaticon.com/512/1828/1828614.png" width="15">
+            <img src="https://cdn-icons-png.flaticon.com/512/1828/1828614.png" width="15">
+            <img src="https://cdn-icons-png.flaticon.com/512/1828/1828970.png" width="15">
+            {% else %}
+            <img src="https://cdn-icons-png.flaticon.com/512/1828/1828614.png" width="15">
+            <img src="https://cdn-icons-png.flaticon.com/512/1828/1828614.png" width="15">
+            <img src="https://cdn-icons-png.flaticon.com/512/1828/1828614.png" width="15">
+            <img src="https://cdn-icons-png.flaticon.com/512/1828/1828614.png" width="15">
+            <img src="https://cdn-icons-png.flaticon.com/512/1828/1828614.png" width="15">
+            {% endif %}<br><hr>
+            {% endfor %}
+        {% endif %}
+</section>
+
+{% else %}
+
+<div class="container" style="background-color: #2c2b2e38;">
+    <br>
+    <div class='row'>
+    <div class='p-20' ><img src={{user.imageURL}} width='180'></div>
+    <div class='col'><h2>{{user.name}}</h2></div>
+    </div>
+    <hr width=100% color='gray'>
+    <h3>Dados:</h3>
+    <div class='row'>
+    <div class='col self-align-center'>                                                                                   
+        <ul style="list-style: none; margin: 2%">
+        <li><b>Email: </b>{{user.email}}</li>
+        <li><b>Data de Nascimento: </b>{{user.birth_date}}</li>
+        <li><b>Sexo: </b>{{user.gender}}</li>
+        <li><b>Endereço: </b> {{user.adress}}</li>
+        <li><b>Avaliação: </b> 
+        {% if avg_rate == 5 %}
+            <img src="https://cdn-icons-png.flaticon.com/512/1828/1828614.png" width="15">
+            <img src="https://cdn-icons-png.flaticon.com/512/1828/1828614.png" width="15">
+            <img src="https://cdn-icons-png.flaticon.com/512/1828/1828614.png" width="15">
+            <img src="https://cdn-icons-png.flaticon.com/512/1828/1828614.png" width="15">
+            <img src="https://cdn-icons-png.flaticon.com/512/1828/1828614.png" width="15">
+            {% elif avg_rate >= 4 %}
+            <img src="https://cdn-icons-png.flaticon.com/512/1828/1828614.png" width="15">
+            <img src="https://cdn-icons-png.flaticon.com/512/1828/1828614.png" width="15">
+            <img src="https://cdn-icons-png.flaticon.com/512/1828/1828614.png" width="15">
+            <img src="https://cdn-icons-png.flaticon.com/512/1828/1828614.png" width="15">
+            <img src="https://cdn-icons-png.flaticon.com/512/1828/1828970.png" width="15">
+            {% elif avg_rate >= 3 %}
+            <img src="https://cdn-icons-png.flaticon.com/512/1828/1828614.png" width="15">
+            <img src="https://cdn-icons-png.flaticon.com/512/1828/1828614.png" width="15">
+            <img src="https://cdn-icons-png.flaticon.com/512/1828/1828614.png" width="15">
+            <img src="https://cdn-icons-png.flaticon.com/512/1828/1828970.png" width="15">
+            <img src="https://cdn-icons-png.flaticon.com/512/1828/1828970.png" width="15">
+            {% elif avg_rate >= 2 %}
+            <img src="https://cdn-icons-png.flaticon.com/512/1828/1828614.png" width="15">
+            <img src="https://cdn-icons-png.flaticon.com/512/1828/1828614.png" width="15">
+            <img src="https://cdn-icons-png.flaticon.com/512/1828/1828970.png" width="15">
+            <img src="https://cdn-icons-png.flaticon.com/512/1828/1828970.png" width="15">
+            <img src="https://cdn-icons-png.flaticon.com/512/1828/1828970.png" width="15">
+            {% else %}
+            <img src="https://cdn-icons-png.flaticon.com/512/1828/1828614.png" width="15">
+            <img src="https://cdn-icons-png.flaticon.com/512/1828/1828970.png" width="15">
+            <img src="https://cdn-icons-png.flaticon.com/512/1828/1828970.png" width="15">
+            <img src="https://cdn-icons-png.flaticon.com/512/1828/1828970.png" width="15">
+            <img src="https://cdn-icons-png.flaticon.com/512/1828/1828970.png" width="15">
+            {% endif %} <b>({{avg_rate}}/5)</b></li><br>
+        </ul>
+        <hr>
+        <div class="media" style="text-align: justify;">
+            <h5><a href="{% url 'update-user' %}" class="btn btn-primary">Atualizar Dados</a></h5>
+            <img src="https://cdn-icons-png.flaticon.com/512/1159/1159633.png" width="40" class="mr-5 rounded" style="padding: 5px"> <br>   
+        </div>
+    </div>
+    </div>
+</div>
+
+<hr width=100% color='grey'>
+
+<section>
+    <header>
+        <h3>Avaliações</h3><br>
+
+    {% if not rating.all %}
+        <small>Ainda não existe nenhuma avaliação para este perfil.</small>
+        <br><br>
+    {% else %}
+        {% for rate in rating.all %}
+            <h5><a href="{% url 'detail' rate.author.id %}">{{ rate.author.name }}</a><small>- {{ rate.date }}</small></h5>
+            
+            {% if rate.body %}
+            <b>Comentário:</b> "{{ rate.body }}"
+            {% else %}
+            <b>Comentário:</b> <i><small>Nenhum</small></i>
+            {% endif %}
+
+            <br><b>Nota:</b> 
+            {% if rate.rate == 1 %}
+            <img src="https://cdn-icons-png.flaticon.com/512/1828/1828614.png" width="15">
+            <img src="https://cdn-icons-png.flaticon.com/512/1828/1828970.png" width="15">
+            <img src="https://cdn-icons-png.flaticon.com/512/1828/1828970.png" width="15">
+            <img src="https://cdn-icons-png.flaticon.com/512/1828/1828970.png" width="15">
+            <img src="https://cdn-icons-png.flaticon.com/512/1828/1828970.png" width="15">
+
+            {% elif rate.rate == 2 %}
+            <img src="https://cdn-icons-png.flaticon.com/512/1828/1828614.png" width="15">
+            <img src="https://cdn-icons-png.flaticon.com/512/1828/1828614.png" width="15">
+            <img src="https://cdn-icons-png.flaticon.com/512/1828/1828970.png" width="15">
+            <img src="https://cdn-icons-png.flaticon.com/512/1828/1828970.png" width="15">
+            <img src="https://cdn-icons-png.flaticon.com/512/1828/1828970.png" width="15">
+            {% elif rate.rate == 3 %}
+            <img src="https://cdn-icons-png.flaticon.com/512/1828/1828614.png" width="15">
+            <img src="https://cdn-icons-png.flaticon.com/512/1828/1828614.png" width="15">
+            <img src="https://cdn-icons-png.flaticon.com/512/1828/1828614.png" width="15">
+            <img src="https://cdn-icons-png.flaticon.com/512/1828/1828970.png" width="15">
+            <img src="https://cdn-icons-png.flaticon.com/512/1828/1828970.png" width="15">
+            {% elif rate.rate == 4 %}
+            <img src="https://cdn-icons-png.flaticon.com/512/1828/1828614.png" width="15">
+            <img src="https://cdn-icons-png.flaticon.com/512/1828/1828614.png" width="15">
+            <img src="https://cdn-icons-png.flaticon.com/512/1828/1828614.png" width="15">
+            <img src="https://cdn-icons-png.flaticon.com/512/1828/1828614.png" width="15">
+            <img src="https://cdn-icons-png.flaticon.com/512/1828/1828970.png" width="15">
+            {% else %}
+            <img src="https://cdn-icons-png.flaticon.com/512/1828/1828614.png" width="15">
+            <img src="https://cdn-icons-png.flaticon.com/512/1828/1828614.png" width="15">
+            <img src="https://cdn-icons-png.flaticon.com/512/1828/1828614.png" width="15">
+            <img src="https://cdn-icons-png.flaticon.com/512/1828/1828614.png" width="15">
+            <img src="https://cdn-icons-png.flaticon.com/512/1828/1828614.png" width="15">
+            {% endif %}<br><hr>
+            {% endfor %}
+        {% endif %}
+</section>
+
+{% endif %}
+
+{% endblock %}
+     

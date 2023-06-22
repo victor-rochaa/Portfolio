@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block title%} Editar Avaliação {{rating.profile.name}} {% endblock %}
+
+{% block content %}
+
+{% if user.is_authenticated %}
+    {% if user.id == rating.author.id %}
+
+    <h2>Editar Avaliação</h2>
+    <br>
+
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button class="btn btn-success">Atualizar</button><br>
+
+    {% else %}
+    <br><center><h3>Você não tem permissão para acessar esta página!</h3></center><br>
+
+    {% endif %}
+{% else %}
+    <br><center><h3>Faça login para acessar esta página!</h3></center><br>
+{% endif %}
+{% endblock %}
+
