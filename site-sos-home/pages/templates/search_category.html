@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block title%} Pesquisa: {{ searched }} {% endblock %}
+
+{% block content %}
+
+    <center>
+        {% if searched %}
+        <h2>Você procurou por: {{ searched }}</h2>
+        <br>
+            {% if cat %}
+                {% for category in cat %}
+                <a href="{% url 'category-detail' category.id %}"><strong>{{category}}</strong> </a> 
+                <br>
+                {% endfor %}
+                <br>
+                <a href="{% url 'search-page' %}" class="btn btn-secondary btn-lg btn-block">Voltar </a>
+            {% else %}
+                Não existem resultados para a sua busca!<br>
+                <small>Talvez o nosso site ainda não possua esse tipo de serviço ou você tenha digitado errado...</small><br><br>
+                <a href="{% url 'search-page' %}" class="btn btn-secondary btn-lg btn-block">Voltar </a>
+            {% endif %}
+        {% else %}
+            <h2>Tente colocar alguma coisa no campo de pesquisa...</h2><br>
+            <a href="{% url 'search-page' %}" class="btn btn-secondary btn-lg btn-block">Voltar </a>
+        {% endif %}
+    </center>
+    <br><br>
+
+{% endblock %}
+
+<ul> 
+    {% for cat in object_list %}
+        <li> <a href="{% url 'category-detail' cat.id %}"><strong>{{ cat.name }}</strong> </a> 
+        <br>
+        {{ cat.description|safe }}
+        
+        <br><hr>
+    {% endfor %}
+    </ul>   

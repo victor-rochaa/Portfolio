@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block title%} Categorias {% endblock %}
+
+{% block content %}
+
+<h1>Categorias</h1>
+<hr><br>
+<ul> 
+{% for cat in object_list %}
+    <li> <a href="{% url 'category-detail' cat.id %}"><strong>{{ cat.name }}</strong> </a> 
+    <br>
+    {{ cat.description|safe }}
+    
+    <br><hr>
+{% endfor %}
+</ul>   
+
+{% endblock %}

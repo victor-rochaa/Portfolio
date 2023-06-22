@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+Atualizar Dados
+{% endblock title %}
+
+
+{% block content %}
+<h1>Atualizar Dados</h1>
+<hr><br>
+
+{%if user.is_authenticated%}
+<form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button class="btn btn-success">Atualizar</button><br>
+{% else %}
+<center><h3>Faça login para poder alterar seus dados!</h3></center> <br>
+{% endif %}
+
+{% endblock content %}
+
+
