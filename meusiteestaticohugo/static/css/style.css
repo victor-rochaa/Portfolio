@@ -1,0 +1,214 @@
+.dropbtn {
+  font-family: "Times New Roman";
+  font-weight: bold;
+  background-color: white;
+  color: black;
+  font-size: 15px;
+  margin: 0 50px;
+  padding: 3px;
+  outline: 2px solid rgba(0, 0, 0, 0.685);
+  border: 1px solid rgba(0, 0, 0, 0.877);
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 140px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 10px 10px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {background-color: rgba(0, 204, 255, 0.705);}
+
+.dropdown:hover .dropdown-content {display: block;}
+
+.dropdown:hover .dropbtn {background-color: rgba(0, 204, 255, 0.705);}
+
+header h1 {
+  justify-content: flex-start;
+  width: 99.3%;
+  flex-direction: column;
+  margin: 0 auto;
+  color: rgb(255, 255, 255);
+  font-family: 'Fantasy';
+  font-size: 50px;
+  text-align: center;
+  padding: 5px;
+  background-color: rgb(11, 27, 61);
+}
+
+header {
+  font-family: "Lucida Bright", "Times New Roman", "serif";
+  border: 0;
+  background-image: url(https://images8.alphacoders.com/705/705128.jpg); 
+  background-size:100%;
+  background-position: center;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 45%;
+  justify-content: center;
+  margin: 0 auto;
+  align-items: center;
+}
+
+header nav {
+  position: relative;
+  bottom: 10px;
+  left: 560px;
+  height: 200px;
+  width: 250px;
+  padding: 0px;
+  margin: 0 auto;
+  align-items: center;
+  text-align: right;
+  flex-direction: column;
+}
+
+header nav button {
+  background-color: white;
+  margin: 8px 50px;
+  padding: 3px;
+  outline: 2px solid rgba(0, 0, 0, 0.685);
+  border: 1px solid rgba(0, 0, 0, 0.877);
+}
+
+header nav a {
+  font-family: "Times New Roman";
+  text-decoration: none;
+  font-size:15px;
+  color: black;
+  font-weight: bold;
+}
+
+header nav button:hover {
+  background-color: rgba(0, 204, 255, 0.705);
+}
+
+@media screen and (max-width: 800px) {
+  header nav{
+    display: flex;
+    position: relative;
+    left: 350px;
+    bottom: 90px;
+    height: 100px;
+    width: 150px;
+    padding: 0px;
+    margin: 0 auto;
+    align-items: center;
+    text-align: right;
+    flex-direction: column;
+  }
+
+  header nav button {
+    margin-bottom: 10px;
+    padding: 0;
+    position: relative;
+    right: 230px;
+  }
+
+  header nav a {
+    font-family: "Times New Roman";
+    text-decoration: none;
+    font-size:12px;
+    color: black;
+    font-weight: bold;
+  }
+
+  header h1 {
+    font-size: large;
+    margin-bottom: 90px;
+  }
+
+  main img {
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    height: 80%;
+    text-align: center;
+    align-items: center;
+    margin: 0 auto;
+  }
+
+  .dropbtn {
+    font-size: 12px;
+    margin: 0 50px;
+    padding: 0px;
+    outline: 2px solid rgba(0, 0, 0, 0.685);
+    border: 1px solid rgba(0, 0, 0, 0.877);
+  }
+
+  .dropdown-content {
+    position: absolute;
+    right: 250px;
+    min-width: 100px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+  }
+
+  .dropdown-content a {
+    padding: 5px 5px;
+    display: block;
+  }
+}
+
+mapasantorini {
+  align-items: center;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+}
+
+imagemsantorinihome {
+  align-items: center;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+}
+
+fotosantorinisobre {
+  align-items: center;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  width: 80%;
+  margin: 0 auto;
+  flex: 1;
+}
+  
+footer {
+  font-family: "Times New Roman", "serif";
+  border: 0;
+  padding: 10px;
+  background-color: rgba(16, 57, 104, 0.712);  
+  color: rgb(4, 12, 43);
+  display: flex;
+  justify-content: center;
+  width: 98.5%;
+  margin: 0 auto;
+}
+  
+body {
+  background-color:rgba(108, 113, 119, 0.274);
+  font-family: "Arial";
+  color: black;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}

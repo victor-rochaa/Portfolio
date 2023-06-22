@@ -1,0 +1,17 @@
+<header>
+    <h1>{{ .Site.Title}}</h1>
+    <nav>
+        <ul>
+            <button><a href="{{ "" | relURL }}">HOME    </a></button>
+            <button><a href="{{ "about" | relURL }}">SOBRE A ILHA</a></button>
+            <button><a href="{{ "hotéis" | relURL }}">HOTÉIS</a></button>
+            <div class="dropdown">
+                <button class="dropbtn">ATRAÇÕES</button>
+                <div class="dropdown-content">
+                  <a href="{{ "destinations" | relURL }}">Destinos</a>
+                  <a href="{{ "restaurants" | relURL }}">Restaurantes</a>
+                </div>
+            </div>
+        </ul>
+    </nav>
+</header>
