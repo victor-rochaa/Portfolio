@@ -1,0 +1,53 @@
+{% if user.is_employee %}
+
+<div class="container" style="border: 8px solid black; padding:20px; background-color: #c9bd1a7e ;color: #040830; font-size: 17px; font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;">
+<h1>Cadastro Confirmado</h1>
+<br>
+Olá {{user.name}}!
+<br><br>
+Muito obrigado por se inscrever como prestador no nosso SOS Home!!!
+<br><br>
+<p>Será um prazer imenso ter você como nosso colaborador.</p>
+<p>Estamos confiantes que essa parceria será muito benéfica.</p>
+<br>
+<p> Qualquer dúvida ou problema entre em contato com o nosso suporte: <a href="mailto:soshomesuporte@gmail.com">soshomesuporte@gmail.com</a></p>
+<br><br>
+Até mais e bons serviços!
+
+<br><br>
+
+<div class="media" style="text-align: justify;">
+    <img src="https://i.imgur.com/CI8twJJ.jpg" width="200" class="mr-5 rounded">
+    Att. SOS Home <br>
+    <br>
+</div>
+
+</div>
+
+{% else %}
+
+<div class="container" style="border: 8px solid black; padding:20px; background-color: #c9bd1a7e ;color: #040830; font-size: 17px; font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;">
+<h1>Cadastro Confirmado</h1>
+<br>
+Olá {{user.name}}!
+<br><br>
+Muito obrigado por se inscrever como cliente no nosso SOS Home!!!
+<br><br>
+<p>Será um prazer imenso ter você conosco! </p>
+<p>Estamos confiantes que essa parceria será muito benéfica.</p>
+<br>
+<p> Qualquer dúvida ou problema entre em contato com o nosso suporte: <a href="mailto:soshomesuporte@gmail.com">soshomesuporte@gmail.com</a></p>
+<br><br>
+Até mais.
+
+<br><br>
+
+<div class="media" style="text-align: justify;">
+    <img src="https://i.imgur.com/CI8twJJ.jpg" width="200" class="mr-5 rounded">
+    Att. SOS Home <br>
+    <br>
+</div>
+
+</div>
+
+{% endif %}

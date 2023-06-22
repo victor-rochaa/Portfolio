@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Criar Usuário - Cliente
+{% endblock title %}
+
+{% block content %}
+<h2>Cadastro - Cliente</h2>
+<hr><br>
+
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">Criar</button>
+</form>
+<br>
+<p>Já possui cadastro? <a href="{% url 'login' %}">Faça login</a></p>
+
+{% endblock content %} 
