@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block title%} Categoria: {{ cat.name }} {% endblock %}
+
+{% block content %}
+
+<h1>Categoria: {{ cat.name }}</h1>
+<hr>
+
+<h5>Descrição</h5>{{ cat.description }}
+<br><br><br>
+
+<h5>Postagens</h5>
+<br>
+
+<ul> 
+    {% for post in cat.post_set.all %}
+        <li> <a href="{% url 'post-detail' post.pk %}"><strong>{{ post.title }}</strong> </a> - 
+            <small>{{ post.author.first_name}} {{post.author.last_name }}</small> <br>
+            <small>{{ post.datetime }}</small></li> 
+    {% endfor %}
+</ul>
+
+<br>
+<a href="{% url 'categories' %}" class="btn btn-secondary">Voltar </a>
+
+{% endblock %}

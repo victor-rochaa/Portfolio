@@ -1,0 +1,2 @@
+web: gunicorn MeuBlog.wsgi
+release: python manage.py migrate

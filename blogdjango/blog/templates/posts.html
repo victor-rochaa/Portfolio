@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block title%} Postagens do Blog {% endblock %}
+
+{% block content %}
+
+<h1>Postagens</h1>
+<hr><br>
+<ul> 
+{% for post in object_list %}
+    <li> <a href="{% url 'post-detail' post.pk %}"><strong>{{ post.title }}</strong> </a> - 
+        <small>{{ post.author.first_name}} {{post.author.last_name }}</small> <br>
+        <small>{{ post.datetime }}</small> <br>
+        {{ post.body|slice:":290"|safe}} </li> 
+        <small><a href="{% url 'update_post' post.pk %}" class="btn btn-info btn-sm">Editar</a> 
+            <a href="{% url 'delete_post' post.pk %}" class="btn btn-danger btn-sm">Excluir</a></small><br><br>
+{% endfor %}
+</ul>
+
+<a href="{% url 'home' %}" class="btn btn-primary">Home </a> <br><br>
+
+{% endblock %}

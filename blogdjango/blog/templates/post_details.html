@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% block title%} {{ post.title }} {% endblock %}
+
+{% block content %}
+
+<h1>{{ post.title }}</h1>
+
+<small> Por: {{ post.author.first_name }} {{ post.author.last_name }} <br>
+    Data: {{ post.datetime }} </small>
+<hr>
+<small><a href="{% url 'update_post' post.pk %}" class="btn btn-info btn-sm">Editar</a> 
+    <a href="{% url 'delete_post' post.pk %}" class="btn btn-danger btn-sm">Excluir</a></small><br>
+<br><br>
+
+<div class="media">
+    <img src={{ post.imageURL }} width="200" class="mr-5">
+    <div class="media-body">
+      <p>{{ post.body|safe }}</p>
+<br><br>
+    </div>
+</div>
+
+<br><br>
+<a href="{% url 'posts' %}" class="btn btn-secondary">Voltar </a> 
+
+<br><hr>
+<h3>Categorias</h3>
+
+<ul>
+{% if post.category.all %}
+    {% for cat in post.category.all %}
+        <li><a href="{% url 'category-detail' cat.id %}"> {{ cat.name }}</a> </li>
+    {% endfor %}
+{% endif %}
+</ul>
+
+<br><hr>
+<h3>Comentários</h3>
+
+{% if not post.comments.all %}
+    <small>Ainda não há comentários para esta publicação...</small>
+    <br><br>
+    <a href="{% url 'add_comment' post.pk %}" class="btn btn-dark btn-sm">Adicionar Comentário</a>
+    <br><br>
+{% else %}
+    <a href="{% url 'add_comment' post.pk %}" class="btn btn-dark btn-sm">Adicionar Comentário</a> <br><br>
+    {% for comment in post.comments.all %}
+        <strong>{{ comment.author.first_name }} {{ comment.author.last_name }}</strong> <small>- {{ comment.datetime }}</small>
+        <br>{{ comment.body }} <br><br>
+    {% endfor %}
+{% endif %}
+
+<br><hr>
+
+{% endblock %}
